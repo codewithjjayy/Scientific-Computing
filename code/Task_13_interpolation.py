@@ -1,5 +1,5 @@
 """
-BIT 2118: Scientific Computing
+
 Task 13 – Interpolation
 Real-World Case: Estimating Missing Air Temperature Readings
 
@@ -21,7 +21,7 @@ import numpy as np
 from scipy.interpolate import CubicSpline
 import matplotlib.pyplot as plt
 
-# ── 1. Known data points ──────────────────────────────────────────────────────
+# 1. Known data points
 hours = np.array([ 0,  3,  6,  9, 12, 18, 24], dtype=float)
 temps = np.array([15, 13, 11, 16, 24, 22, 17], dtype=float)
 
@@ -31,13 +31,13 @@ query_hours = np.array([2, 5, 10, 15, 20], dtype=float)
 print("=== Temperature Interpolation ===")
 print(f"  Known data points: {list(zip(hours.astype(int), temps))}")
 
-# ── 2. Linear Interpolation ───────────────────────────────────────────────────
+#  2. Linear Interpolation 
 temps_linear = np.interp(query_hours, hours, temps)
 print(f"\n  Linear interpolation at hours {list(query_hours.astype(int))}:")
 for h, t in zip(query_hours, temps_linear):
     print(f"    Hour {h:2.0f}: {t:.2f} °C")
 
-# ── 3. Polynomial Interpolation (degree 6 to pass through all 7 points) ───────
+#  3. Polynomial Interpolation (degree 6 to pass through all 7 points)
 coeffs = np.polyfit(hours, temps, deg=6)
 poly_func = np.poly1d(coeffs)
 temps_poly = poly_func(query_hours)
@@ -45,14 +45,14 @@ print(f"\n  Polynomial (degree 6) at hours {list(query_hours.astype(int))}:")
 for h, t in zip(query_hours, temps_poly):
     print(f"    Hour {h:2.0f}: {t:.2f} °C")
 
-# ── 4. Cubic Spline Interpolation ─────────────────────────────────────────────
+#  4. Cubic Spline Interpolation 
 cs = CubicSpline(hours, temps)
 temps_spline = cs(query_hours)
 print(f"\n  Cubic spline at hours {list(query_hours.astype(int))}:")
 for h, t in zip(query_hours, temps_spline):
     print(f"    Hour {h:2.0f}: {t:.2f} °C")
 
-# ── 5. Experiment – change data point at hour 12 (cloudy day) ────────────────
+#  5. Experiment – change data point at hour 12 (cloudy day) 
 temps_cloudy = np.array([15, 13, 11, 14, 17, 15, 14], dtype=float)   # cooler day
 cs_cloudy = CubicSpline(hours, temps_cloudy)
 print(f"\n=== Experiment: Cooler (cloudy) day temperatures ===")
@@ -60,7 +60,7 @@ for h in query_hours:
     print(f"    Hour {h:2.0f}: {cs_cloudy(h):.2f} °C")
 print("  Lower peak temperature → spline curve is flatter throughout the day.")
 
-# ── 6. Visualisation ─────────────────────────────────────────────────────────
+# 6. Visualisation 
 h_fine = np.linspace(0, 24, 300)
 
 fig, axes = plt.subplots(1, 2, figsize=(13, 5))
