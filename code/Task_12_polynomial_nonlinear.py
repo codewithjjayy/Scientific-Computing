@@ -1,5 +1,4 @@
 """
-BIT 2118: Scientific Computing
 Task 12 – Polynomial and Nonlinear Equation Solving
 Real-World Case: Projectile Range – Finding Launch Angles
 
@@ -21,7 +20,7 @@ import numpy as np
 from scipy.optimize import brentq, fsolve
 import matplotlib.pyplot as plt
 
-# ── 1. Polynomial root finding using numpy.roots ──────────────────────────────
+#  1. Polynomial root finding using numpy.roots 
 # Example polynomial: p(x) = x³ - 6x² + 11x - 6 = 0
 # Known roots: x = 1, 2, 3
 coeffs = [1, -6, 11, -6]   # coefficients from highest to lowest degree
@@ -31,7 +30,7 @@ print("=== Polynomial  x³ - 6x² + 11x - 6 ===")
 print(f"  Roots (numpy.roots): {np.round(roots_poly, 6)}")
 print(f"  Expected: [1, 2, 3]")
 
-# ── 2. Nonlinear equation – projectile range ──────────────────────────────────
+#  2. Nonlinear equation – projectile range 
 v0       = 20.0   # m/s
 g        = 9.81   # m/s²
 R_target = 35.0   # m
@@ -56,8 +55,8 @@ print(f"  High-angle solution : θ = {theta2:.4f}°")
 print(f"  Verification: R(θ1) = {((v0**2 * np.sin(2*np.radians(theta1)))/g):.4f} m")
 print(f"  Verification: R(θ2) = {((v0**2 * np.sin(2*np.radians(theta2)))/g):.4f} m")
 
-# ── 3. fsolve – general nonlinear system ─────────────────────────────────────
-# System: sin(x) - y = 0  and  x² + y² - 1 = 0  (circle-sine intersection)
+# ── 3. fsolve 
+general nonlinear system: sin(x) - y = 0  and  x² + y² - 1 = 0  (circle-sine intersection)
 def system(vars):
     x, y = vars
     eq1 = np.sin(x) - y
@@ -70,7 +69,7 @@ print(f"\n=== fsolve: sin(x)=y and x²+y²=1 ===")
 print(f"  Solution: x = {x_sol:.6f}, y = {y_sol:.6f}")
 print(f"  sin(x) = {np.sin(x_sol):.6f}, y = {y_sol:.6f} ✓")
 
-# ── 4. Experiment – change target range ──────────────────────────────────────
+# 4. Experiment – change target range
 R_new = 25.0
 def range_eq2(theta_deg):
     return (v0**2 * np.sin(2 * np.radians(theta_deg))) / g - R_new
@@ -82,7 +81,7 @@ print(f"  Low-angle : θ = {theta1b:.4f}°  (was {theta1:.4f}°)")
 print(f"  High-angle: θ = {theta2b:.4f}°  (was {theta2:.4f}°)")
 print("  Shorter range → flatter and steeper angles that are closer to 45°.")
 
-# ── 5. Visualisation ─────────────────────────────────────────────────────────
+# 5. Visualisation 
 theta_arr = np.linspace(1, 89, 300)
 R_arr = (v0**2 * np.sin(2 * np.radians(theta_arr))) / g
 
