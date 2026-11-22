@@ -27,7 +27,7 @@ Equations (heat balance, uniform spacing):
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ── 1. Define the system ──────────────────────────────────────────────────────
+# 1. Define the system 
 A = np.array([
     [-2,  1,  0,  0],
     [ 1, -2,  1,  0],
@@ -43,7 +43,7 @@ x_exact = np.linalg.solve(A, b)
 print("=== Temperature Distribution System ===")
 print(f"  Exact (np.linalg.solve): {np.round(x_exact, 4)}")
 
-# ── 2. Jacobi Method ─────────────────────────────────────────────────────────
+#  2. Jacobi Method 
 def jacobi(A, b, tol=1e-6, max_iter=200):
     n = len(b)
     x = np.zeros(n)          # initial guess = all zeros
@@ -64,7 +64,7 @@ def jacobi(A, b, tol=1e-6, max_iter=200):
     print("  Jacobi did not converge.")
     return x, history
 
-# ── 3. Gauss-Seidel Method ───────────────────────────────────────────────────
+#  3. Gauss-Seidel Method 
 def gauss_seidel(A, b, tol=1e-6, max_iter=200):
     n = len(b)
     x = np.zeros(n)
@@ -92,7 +92,7 @@ print(f"\n  Jacobi result      : {np.round(x_jac, 4)}")
 print(f"  Gauss-Seidel result: {np.round(x_gs, 4)}")
 print(f"  Exact solution     : {np.round(x_exact, 4)}")
 
-# ── 4. Experiment – different boundary conditions ────────────────────────────
+#  4. Experiment – different boundary conditions 
 T0_new, T5_new = 200.0, 20.0
 b_exp = np.array([-T0_new, 0, 0, -T5_new], dtype=float)
 x_exp, _ = gauss_seidel(A, b_exp)
@@ -100,7 +100,7 @@ print(f"\n=== Experiment: T0={T0_new}°C, T5={T5_new}°C ===")
 print(f"  T1={x_exp[0]:.2f}, T2={x_exp[1]:.2f}, T3={x_exp[2]:.2f}, T4={x_exp[3]:.2f}")
 print("  Steeper gradient → temperatures drop more sharply across the rod.")
 
-# ── 5. Visualisation ─────────────────────────────────────────────────────────
+# 5. Visualisation 
 # Temperature profile along the rod
 positions_orig = [T0] + list(x_jac) + [T5]
 positions_exp  = [T0_new] + list(x_exp) + [T5_new]
