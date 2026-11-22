@@ -1,5 +1,5 @@
 """
-BIT 2118: Scientific Computing
+
 Task 17 – Ordinary Differential Equations: Euler Method
 Real-World Case: Cooling of a Hot Cup of Coffee (Newton's Law of Cooling)
 
@@ -23,7 +23,7 @@ Euler's method approximates the solution step by step:
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ── 1. Constants ──────────────────────────────────────────────────────────────
+#  1. Constants 
 T_ambient = 22.0    # °C (room temperature)
 k         = 0.07    # cooling rate (1/min)
 T0        = 95.0    # °C (initial coffee temperature)
@@ -37,7 +37,7 @@ def f(t, T):
 def T_exact(t):
     return T_ambient + (T0 - T_ambient) * np.exp(-k * t)
 
-# ── 2. Euler's Method ─────────────────────────────────────────────────────────
+# 2. Euler's Method
 def euler(f, T0, t0, t_end, h):
     t_vals = [t0]
     T_vals = [T0]
@@ -75,7 +75,7 @@ print(f"    Euler h=0.5: {T05[-1]:.4f} °C")
 print(f"    Exact      : {T_exact(t_end):.4f} °C")
 print("  → Smaller h → closer to exact solution.")
 
-# ── 3. Experiment – higher cooling constant (k = 0.15, e.g. iced drink) ──────
+# 3. Experiment – higher cooling constant 
 k2 = 0.15
 def f2(t, T):
     return -k2 * (T - T_ambient)
@@ -87,7 +87,7 @@ print(f"\n=== Experiment: k doubled to {k2} (faster cooling) ===")
 print(f"  Temperature at 30 min: {T1b[30]:.2f} °C  (original: {T1[30]:.2f} °C)")
 print("  Higher k → coffee cools much faster.")
 
-# ── 4. Visualisation ─────────────────────────────────────────────────────────
+#  4. Visualisation 
 fig, axes = plt.subplots(1, 2, figsize=(13, 5))
 
 # Temperature vs time for different step sizes
