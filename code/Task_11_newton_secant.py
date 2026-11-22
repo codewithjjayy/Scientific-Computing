@@ -1,5 +1,5 @@
 """
-BIT 2118: Scientific Computing
+
 Task 11 – Root Finding: Newton-Raphson and Secant Methods
 Real-World Case: Optimal Pipe Radius for a Water Supply Network
 
@@ -20,7 +20,7 @@ So:  f(r) = 7853.98 * r^4 - 0.05 = 0
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ── 1. Constants and function definitions ─────────────────────────────────────
+# 1. Constants and function definitions
 C = np.pi * 10000 / (8 * 0.001 * 50)   # ≈ 7853.98
 Q_target = 0.05                          # m³/s
 
@@ -33,7 +33,7 @@ def df(r):
 print(f"=== Pipe Radius Root Finding ===")
 print(f"  C = {C:.4f},  Q_target = {Q_target}")
 
-# ── 2. Newton-Raphson Method ──────────────────────────────────────────────────
+# 2. Newton-Raphson Method 
 # x_{n+1} = x_n - f(x_n) / f'(x_n)
 def newton_raphson(func, dfunc, x0, tol=1e-8, max_iter=50):
     x = x0
@@ -56,7 +56,7 @@ root_nr, hist_nr = newton_raphson(f, df, x0=0.1)
 print(f"  Newton-Raphson root : r = {root_nr:.8f} m")
 print(f"  Verification: Q = C * r^4 = {C * root_nr**4:.6f} m³/s  (target {Q_target})")
 
-# ── 3. Secant Method ────────���─────────────────────────────────────────────────
+# 3. Secant Method
 # Does NOT require the derivative – uses two previous points instead.
 # x_{n+1} = x_n - f(x_n) * (x_n - x_{n-1}) / (f(x_n) - f(x_{n-1}))
 def secant(func, x0, x1, tol=1e-8, max_iter=50):
@@ -77,8 +77,8 @@ def secant(func, x0, x1, tol=1e-8, max_iter=50):
 root_sec, hist_sec = secant(f, x0=0.05, x1=0.15)
 print(f"  Secant root         : r = {root_sec:.8f} m")
 
-# ── 4. Experiment – increase target flow rate ─────────────────────────────────
-Q_new = 0.10   # 10 litres/second
+# 4. Experiment 
+
 def f2(r):
     return C * r**4 - Q_new
 root_nr2, _ = newton_raphson(f2, df, x0=0.1)
@@ -86,7 +86,7 @@ print(f"\n=== Experiment: Q_target doubled to {Q_new} m³/s ===")
 print(f"  New radius : r = {root_nr2:.6f} m  (was {root_nr:.6f} m)")
 print("  Larger flow → larger pipe radius required, as expected.")
 
-# ── 5. Visualisation ─────────────────────────────────────────────────────────
+# 5. Visualisation 
 r_vals = np.linspace(0.01, 0.15, 300)
 f_vals = f(r_vals)
 
