@@ -16,20 +16,20 @@ Assumptions:
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ── 1. Create the data ────────────────────────────────────────────────────────
+#  1. Create the data
 rng = np.random.default_rng(seed=42)          # fixed seed → same numbers every run
 energy = rng.uniform(low=3.0, high=9.0, size=(10, 7))   # shape: (panels, days)
 
 days   = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 panels = [f"Panel-{i+1}" for i in range(10)]
 
-# ── 2. Basic array inspection ─────────────────────────────────────────────────
+# 2. Basic array inspection 
 print("=== Solar Panel Energy Readings (kWh) ===")
 print(f"Array shape : {energy.shape}   (panels × days)")
 print(f"Data type   : {energy.dtype}")
 print(f"\nFirst row (Panel-1 readings):\n  {energy[0]}")
 
-# ── 3. Summary statistics ─────────────────────────────────────────────────────
+# 3. Summary statistics
 daily_total  = energy.sum(axis=0)      # total energy per day  (shape: 7)
 panel_avg    = energy.mean(axis=1)     # average daily output per panel (shape: 10)
 overall_avg  = energy.mean()
@@ -42,12 +42,12 @@ print(f"\nPer-panel average (kWh/day):")
 for name, avg in zip(panels, panel_avg):
     print(f"  {name}: {avg:.2f}")
 
-# ── 4. Boolean masking – find under-performing readings ───────────────────────
+#  4. Boolean masking – find under-performing readings 
 threshold  = 4.5                        # kWh; below this = poor output
 low_output = energy < threshold
 print(f"\nReadings below {threshold} kWh: {low_output.sum()} out of {energy.size}")
 
-# ── 5. Visualisation ──────────────────────────────────────────────────────────
+#  5. Visualisation 
 fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 
 # Heat-map of all readings
