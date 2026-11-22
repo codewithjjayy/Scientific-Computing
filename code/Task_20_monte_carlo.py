@@ -1,5 +1,4 @@
 """
-BIT 2118: Scientific Computing
 Task 20 – Random Numbers and Monte Carlo Methods
 Real-World Case: Estimating the Area of an Irregular Lake (Monte Carlo Integration)
                  and Risk Analysis for a Software Project
@@ -19,9 +18,7 @@ import matplotlib.pyplot as plt
 
 rng = np.random.default_rng(seed=123)
 
-# ═══════════════════════════════════════════════════════════════════════
 # PART A – Estimating π using Monte Carlo
-# ═══════════════════════════════════════════════════════════════════════
 print("=== PART A: Estimating π (Monte Carlo) ===")
 
 def estimate_pi(n, seed=None):
@@ -42,9 +39,9 @@ n_vis = 2000
 pi_est_vis, inside_vis, x_vis, y_vis = estimate_pi(n_vis, seed=42)
 print(f"\n  Estimation with n={n_vis}: π ≈ {pi_est_vis:.4f}  (true π = {np.pi:.4f})")
 
-# ═══════════════════════════════════════════════════════════════════════
+
 # PART B – Software Project Completion Risk (Monte Carlo Simulation)
-# ═══════════════════════════════════════════════════════════════════════
+
 print("\n=== PART B: Software Project Risk Analysis ===")
 
 # A software project has 5 tasks. Each task has a minimum and maximum duration.
@@ -78,7 +75,7 @@ print(f"  5th percentile       : {p5:.2f} days")
 print(f"  95th percentile      : {p95:.2f} days")
 print(f"  P(finish ≤ {deadline} days) : {prob_on_time:.4f}  ({prob_on_time*100:.1f}%)")
 
-# ── Experiment – tighter development phase ────────────────────────────────────
+#  Experiment – tighter development phase 
 tasks_exp = dict(tasks)
 tasks_exp["Development"] = (15, 30)   # development improved
 total_exp = np.zeros(N_SIM)
@@ -91,7 +88,7 @@ print(f"  Mean time  : {total_exp.mean():.2f} days  (was {mean_time:.2f})")
 print(f"  P(≤ {deadline} days) : {prob_exp:.4f}  ({prob_exp*100:.1f}%)  (was {prob_on_time*100:.1f}%)")
 print("  Faster development → significantly higher chance of meeting deadline.")
 
-# ── Visualisation ─────────────────────────────────────────────────────────────
+#  Visualisation 
 fig, axes = plt.subplots(1, 3, figsize=(15, 5))
 
 # Monte Carlo π estimation – scatter plot
