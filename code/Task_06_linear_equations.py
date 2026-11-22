@@ -20,7 +20,7 @@ We solve this system three ways:
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ── 1. Define the coefficient matrix A and RHS vector b ──────────────────────
+#  1. Define the coefficient matrix A and RHS vector b
 A = np.array([
     [2, 1, 0],
     [1, 3, 1],
@@ -33,7 +33,7 @@ print("=== Circuit Equations  (A · x = b) ===")
 print(f"  A =\n{A}")
 print(f"  b = {b}")
 
-# ── 2. NumPy direct solver ────────────────────────────────────────────────────
+#  2. NumPy direct solver 
 x_np = np.linalg.solve(A, b)
 print(f"\n=== Solution via np.linalg.solve ===")
 print(f"  I1 = {x_np[0]:.4f} A")
@@ -44,7 +44,7 @@ print(f"  I3 = {x_np[2]:.4f} A")
 residual = np.max(np.abs(A @ x_np - b))
 print(f"  Residual (max |A·x - b|): {residual:.2e}")
 
-# ── 3. Cramer's Rule ──────────────────────────────────────────────────────────
+#  3. Cramer's Rule 
 det_A = np.linalg.det(A)
 
 def cramers(A, b, j):
@@ -63,7 +63,7 @@ print(f"  I1 = {I1_c:.4f} A")
 print(f"  I2 = {I2_c:.4f} A")
 print(f"  I3 = {I3_c:.4f} A")
 
-# ── 4. Matrix inverse method: x = A⁻¹ · b ───────────────────────────────────
+#  4. Matrix inverse method: x = A⁻¹ · b 
 A_inv = np.linalg.inv(A)
 x_inv = A_inv @ b
 print(f"\n=== Inverse Method  (x = A⁻¹ · b) ===")
@@ -71,14 +71,14 @@ print(f"  I1 = {x_inv[0]:.4f} A")
 print(f"  I2 = {x_inv[1]:.4f} A")
 print(f"  I3 = {x_inv[2]:.4f} A")
 
-# ── 5. Experiment – change b (different voltage source) ──────────────────────
+#  5. Experiment – change b (different voltage source) 
 b2 = np.array([8, 12, 6], dtype=float)
 x2 = np.linalg.solve(A, b2)
 print(f"\n=== Experiment: b changed to {b2} ===")
 print(f"  I1 = {x2[0]:.4f} A,  I2 = {x2[1]:.4f} A,  I3 = {x2[2]:.4f} A")
 print("  Higher voltage source → currents redistribute across all branches.")
 
-# ── 6. Visualisation – bar chart comparing currents ──────────────────────────
+#  6. Visualisation – bar chart comparing currents 
 labels = ["I1", "I2", "I3"]
 x_vals_orig = x_np
 x_vals_exp  = x2
