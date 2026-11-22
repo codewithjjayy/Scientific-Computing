@@ -21,7 +21,7 @@ import numpy as np
 import math
 from decimal import Decimal, getcontext
 
-# ── 1. Classic floating-point demo: 0.1 + 0.2 ≠ 0.3 ──────────────────────────
+#  1. Classic floating-point demo: 0.1 + 0.2 ≠ 0.3 
 a = 0.1
 b = 0.2
 c = a + b
@@ -30,7 +30,7 @@ print(f"  0.1 + 0.2        = {c}")          # prints 0.30000000000000004
 print(f"  0.1 + 0.2 == 0.3 : {c == 0.3}")  # False!
 print(f"  Difference       : {abs(c - 0.3):.2e}")
 
-# ── 2. Accumulation error over 10 000 transactions ────────────────────────────
+#  2. Accumulation error over 10 000 transactions 
 NUM_TX   = 10_000
 amount   = 0.10                        # each transaction = $0.10 exactly (in decimal)
 exact_total = NUM_TX * Decimal("0.10") # exact answer using Decimal arithmetic
@@ -56,7 +56,7 @@ print(f"  NumPy np.sum           : ${np_sum:.6f}  error = {abs(np_sum   - float(
 print(f"  math.fsum              : ${fsum:.6f}  error = {abs(fsum     - float(exact_total)):.2e}")
 print(f"  Decimal (exact)        : ${dec_sum}")
 
-# ── 3. Catastrophic cancellation demo ────────────────────────────────────────
+# 3. Catastrophic cancellation demo 
 # Imagine measuring voltage: V1 = 1.0000001 V, V2 = 1.0000000 V
 # Difference should be 0.0000001 but floating point loses precision
 V1 = 1.0000001
@@ -71,7 +71,7 @@ print(f"  V1 - V2 (float)   : {fp_diff:.10f}")
 print(f"  True difference   : {true_diff}")
 print(f"  Relative error    : {rel_error:.4f}%")
 
-# ── 4. Visualisation ──────────────────────────────────────────────────────────
+#  4. Visualisation 
 import matplotlib.pyplot as plt
 
 n_steps = np.arange(1, NUM_TX + 1, step=100)
