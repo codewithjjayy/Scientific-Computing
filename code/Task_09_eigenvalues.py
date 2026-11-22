@@ -22,7 +22,7 @@ where k1 = 3000 N/m (ground floor stiffness)
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ── 1. Build the stiffness matrix ────────────────────────────────────────────
+# 1. Build the stiffness matrix 
 k1 = 3000.0   # N/m – ground-floor spring stiffness
 k2 = 2000.0   # N/m – upper-floor spring stiffness
 
@@ -34,7 +34,7 @@ K = np.array([
 print("=== Stiffness Matrix K ===")
 print(K)
 
-# ── 2. Compute eigenvalues and eigenvectors ───────────────────────────────────
+#  2. Compute eigenvalues and eigenvectors
 # K is symmetric → use eigh (returns real values, faster and more stable)
 eigenvalues, eigenvectors = np.linalg.eigh(K)
 # eigh already returns sorted eigenvalues (ascending), no need to sort
@@ -48,14 +48,14 @@ print(np.round(eigenvectors, 4))
 print("  Mode 1 (column 0): both floors move in the same direction (in-phase)")
 print("  Mode 2 (column 1): floors move in opposite directions (out-of-phase)")
 
-# ── 3. Verify: K · v = λ · v ─────────────────────────────────────────────────
+#  3. Verify: K · v = λ · v 
 print("\n=== Verification: K · v = λ · v ===")
 for i in range(2):
     lhs = K @ eigenvectors[:, i]
     rhs = eigenvalues[i] * eigenvectors[:, i]
     print(f"  Mode {i+1}: max error = {np.max(np.abs(lhs - rhs)):.2e}")
 
-# ── 4. Larger example – 4×4 tridiagonal (4-storey building) ──────────────────
+#  4. Larger example – 4×4 tridiagonal (4-storey building)
 k = 2500.0
 K4 = np.array([
     [2*k,  -k,   0,   0],
@@ -70,7 +70,7 @@ print(f"\n=== 4-Storey Building – Natural Frequencies ===")
 for i, lam in enumerate(vals4):
     print(f"  Mode {i+1}: ω = {np.sqrt(np.abs(lam)):.4f} rad/s")
 
-# ── 5. Experiment – increase k1 (stiffer ground floor) ───────────────────────
+# 5. Experiment – increase k1 (stiffer ground floor) 
 k1_new = 6000.0
 K_exp  = np.array([[k1_new + k2, -k2], [-k2, k2]], dtype=float)
 vals_exp, _ = np.linalg.eigh(K_exp)
@@ -80,7 +80,7 @@ for i, lam in enumerate(vals_exp):
     print(f"  λ{i+1} = {lam:.2f}  →  ω{i+1} = {np.sqrt(lam):.4f} rad/s")
 print("  Higher stiffness → higher natural frequencies → less risk of resonance.")
 
-# ── 6. Visualisation – mode shapes ───────────────────────────────────────────
+# 6. Visualisation – mode shapes 
 fig, axes = plt.subplots(1, 2, figsize=(10, 5))
 floors = [0, 1, 2]   # ground (0), floor 1, floor 2
 
