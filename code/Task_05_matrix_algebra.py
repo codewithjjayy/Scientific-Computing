@@ -15,7 +15,7 @@ Assumptions:
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ── 1. Define two 4×4 network cost matrices ───────────────────────────────────
+#  1. Define two 4×4 network cost matrices 
 # Rows and columns = routers A, B, C, D
 # Value = link cost (ms). 0 means no direct link.
 
@@ -41,29 +41,29 @@ print(A)
 print("\n=== Matrix B (Network Snapshot 2) ===")
 print(B)
 
-# ── 2. Matrix addition – combined cost view ───────────────────────────────────
+#  2. Matrix addition – combined cost view 
 C = A + B
 print("\n=== A + B (Combined costs) ===")
 print(C)
 
-# ── 3. Scalar multiplication – increase all costs by 20% ─────────────────────
+#  3. Scalar multiplication – increase all costs by 20%
 A_scaled = 1.2 * A
 print("\n=== 1.2 × A  (20% congestion increase) ===")
 print(np.round(A_scaled, 2))
 
-# ── 4. Transpose – reverse the direction of all links ─────────────────────────
+#  4. Transpose – reverse the direction of all links─
 A_T = A.T
 print("\n=== Transpose of A ===")
 print(A_T)
 print(f"  A is symmetric: {np.allclose(A, A_T)}")   # True for undirected networks
 
-# ── 5. Matrix multiplication – two-hop reachability ──────────────────────────
+#  5. Matrix multiplication – two-hop reachability
 # A @ A gives the sum of products of paths of length 2 between nodes.
 A2 = A @ A
 print("\n=== A × A  (Two-hop path costs) ===")
 print(np.round(A2, 2))
 
-# ── 6. Determinant and inverse ────────────────────────────────────────────────
+#  6. Determinant and inverse 
 # Use a non-singular sub-matrix (3×3) for the demo
 M = np.array([
     [2, 1, 0],
@@ -83,12 +83,12 @@ print(np.round(inv_M, 4))
 identity_check = np.round(M @ inv_M, 10)
 print(f"  M × M⁻¹ ≈ I : {np.allclose(identity_check, np.eye(3))}")
 
-# ── 7. Experiment – change scalar factor to 1.5 ──────────────────────────────
+# 7. Experiment – change scalar factor to 1.5 
 print("\n=== Experiment: 1.5 × A (50% congestion increase) ===")
 print(np.round(1.5 * A, 2))
 print("  Higher scalar → all link costs increase proportionally.")
 
-# ── 8. Visualisation – heat-map of matrix A ───────────────────────────────────
+#  8. Visualisation – heat-map of matrix A 
 fig, axes = plt.subplots(1, 2, figsize=(11, 4))
 
 for ax, mat, title in zip(axes, [A, C], ["Matrix A – Network Snapshot 1", "A + B – Combined Costs"]):
