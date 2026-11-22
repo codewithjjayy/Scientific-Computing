@@ -1,5 +1,5 @@
 """
-BIT 2118: Scientific Computing
+
 Task 16 – Numerical Integration
 Real-World Case: Estimating Total Distance Travelled by a Train
 
@@ -25,7 +25,7 @@ import numpy as np
 from scipy.integrate import trapezoid, simpson, quad
 import matplotlib.pyplot as plt
 
-# ── 1. Known speed function ───────────────────────────────────────────────────
+#  1. Known speed function 
 def v(t):
     return 60 + 20 * np.sin(np.pi * t / 30)   # km/h
 
@@ -37,7 +37,7 @@ exact_km = val / 60.0   # convert from km·min/h to km (divide by 60)
 print(f"=== Train Distance Integration ===")
 print(f"  Exact distance (analytic): {exact_km:.6f} km")
 
-# ── 2. Trapezoidal Rule ───────────────────────────────────────────────────────
+#  2. Trapezoidal Rule 
 n_points = 7   # 7 sample points
 t_arr = np.linspace(0, T, n_points)
 v_arr = v(t_arr)
@@ -53,7 +53,7 @@ for n in [7, 11, 21, 61, 121]:
     trap_n = trapezoid(v_n, t_n) / 60.0
     print(f"    n={n:4d}: {trap_n:.8f} km  error={abs(trap_n - exact_km):.2e}")
 
-# ── 3. Simpson's Rule ─────────────────────────────────────────────────────────
+#  3. Simpson's Rule
 # Simpson requires an odd number of points (even number of intervals)
 t_simp = np.linspace(0, T, 61)   # 61 points = 60 intervals (even)
 v_simp = v(t_simp)
@@ -62,7 +62,7 @@ simp_result = simpson(v_simp, x=t_simp) / 60.0
 print(f"\n  Simpson's Rule    (n=61 points): {simp_result:.8f} km  "
       f"error = {abs(simp_result - exact_km):.2e}")
 
-# ── 4. Gaussian Quadrature via scipy.integrate.quad ──────────────────────────
+# 4. Gaussian Quadrature via scipy.integrate.quad 
 # quad integrates the function directly (no need to sample first)
 def v_km(t):
     return v(t) / 60.0   # convert to km/min so we integrate in minutes
@@ -70,7 +70,7 @@ def v_km(t):
 gauss_result, gauss_error = quad(v_km, 0, T)
 print(f"\n  Gaussian quad:    {gauss_result:.8f} km  estimated error = {gauss_error:.2e}")
 
-# ── 5. Experiment – busier schedule (higher speed) ───────────────────────────
+# 5. Experiment – busier schedule (higher speed) 
 def v2(t):
     return 80 + 30 * np.sin(np.pi * t / 30)   # faster train
 
@@ -80,7 +80,7 @@ print(f"\n=== Experiment: Faster train (v = 80 + 30 sin) ===")
 print(f"  Total distance = {result_exp:.4f} km  (was {simp_result:.4f} km)")
 print("  Higher average speed → greater distance covered in same time.")
 
-# ── 6. Visualisation ─────────────────────────────────────────────────────────
+#  6. Visualisation
 t_fine = np.linspace(0, T, 300)
 
 fig, axes = plt.subplots(1, 2, figsize=(13, 5))
