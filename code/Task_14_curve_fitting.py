@@ -21,13 +21,13 @@ import numpy as np
 from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 
-# ── 1. Recorded data ──────────────────────────────────────────────────────────
+#  1. Recorded data 
 t = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], dtype=float)
 battery = np.array([100, 92, 83, 75, 65, 57, 46, 36, 25, 13, 3], dtype=float)
 
 print("=== Battery Discharge Curve Fitting ===")
 
-# ── 2. Linear fit (degree 1) ──────────────────────────────────────────────────
+# 2. Linear fit (degree 1) 
 coeffs1 = np.polyfit(t, battery, deg=1)
 p1 = np.poly1d(coeffs1)
 residuals1 = battery - p1(t)
@@ -36,7 +36,7 @@ r2_linear = 1 - np.sum(residuals1**2) / np.sum((battery - battery.mean())**2)
 print(f"\n  Linear fit:     y = {coeffs1[0]:.3f}*t + {coeffs1[1]:.3f}")
 print(f"  R² (linear)   = {r2_linear:.4f}")
 
-# ── 3. Quadratic fit (degree 2) ───────────────────────────────────────────────
+# 3. Quadratic fit (degree 2) 
 coeffs2 = np.polyfit(t, battery, deg=2)
 p2 = np.poly1d(coeffs2)
 residuals2 = battery - p2(t)
@@ -45,7 +45,7 @@ r2_quad = 1 - np.sum(residuals2**2) / np.sum((battery - battery.mean())**2)
 print(f"\n  Quadratic fit:  y = {coeffs2[0]:.4f}*t² + {coeffs2[1]:.3f}*t + {coeffs2[2]:.3f}")
 print(f"  R² (quadratic)= {r2_quad:.4f}")
 
-# ── 4. Exponential fit using curve_fit ───────────────────────────────────────
+# 4. Exponential fit using curve_fit 
 def exp_model(t, a, b):
     return a * np.exp(b * t)
 
@@ -70,7 +70,7 @@ print(f"    Linear    : t = {t_pred_lin:.2f} h")
 if t_pred_quad:
     print(f"    Quadratic : t = {t_pred_quad[0]:.2f} h")
 
-# ── 5. Experiment – faster discharge (heavy usage) ───────────────────────────
+#  5. Experiment – faster discharge (heavy usage)
 battery_fast = np.array([100, 85, 70, 54, 40, 28, 18, 10, 5, 2, 1], dtype=float)
 coeffs_fast = np.polyfit(t, battery_fast, deg=2)
 p_fast = np.poly1d(coeffs_fast)
@@ -78,7 +78,7 @@ print(f"\n=== Experiment: Heavy usage discharge ===")
 print(f"  Quadratic fit: y = {coeffs_fast[0]:.4f}*t² + {coeffs_fast[1]:.3f}*t + {coeffs_fast[2]:.3f}")
 print("  Battery drains much faster – the fitted curve falls more steeply.")
 
-# ── 6. Visualisation ─────────────────────────────────────────────────────────
+# 6. Visualisation
 fig, axes = plt.subplots(1, 2, figsize=(13, 5))
 
 t_fine = np.linspace(0, 10, 300)
