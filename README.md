@@ -136,6 +136,5 @@ Each extension applies the same mathematical concept from the original task to a
 
 ## Notes
 
-- The group project tasks for Weeks 11–13 are not included here — the detailed instructions were not provided in the supplied PDF. These should be clarified with the lecturer before submission.
 - All outputs shown in the documentation were produced by actually running the scripts.
 - AI assistance was used in developing this work. This is documented transparently in accordance with institutional requirements.
