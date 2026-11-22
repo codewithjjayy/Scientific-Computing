@@ -27,14 +27,14 @@ rng = np.random.default_rng(seed=7)
 # Raw sensor data in centimetres (integer counts)
 raw_cm = rng.integers(low=1, high=451, size=NUM_READINGS).astype(float)
 
-# ── 1. Pure-Python loop (slow) ────────────────────────────────────────────────
+#  1. Pure-Python loop (slow) 
 t0 = time.perf_counter()
 converted_loop = []
 for val in raw_cm:
     converted_loop.append(val / 100.0)
 t_loop = time.perf_counter() - t0
 
-# ── 2. NumPy vectorized (fast) ────────────────────────────────────────────────
+# 2. NumPy vectorized (fast) 
 t0 = time.perf_counter()
 converted_np = raw_cm / 100.0          # element-wise division – no loop needed
 t_np = time.perf_counter() - t0
@@ -45,7 +45,7 @@ print(f"Python loop : {t_loop*1000:.2f} ms")
 print(f"NumPy       : {t_np*1000:.4f} ms")
 print(f"Speed-up    : {speedup:.0f}×")
 
-# ── 3. Clip out-of-range readings ─────────────────────────────────────────────
+#  3. Clip out-of-range readings
 MAX_RANGE_M  = 4.00    # metres
 MIN_SAFE_M   = 0.20    # metres
 
@@ -61,7 +61,7 @@ print(f"Too close    (<{MIN_SAFE_M} m) : {too_close:,}  ({too_close/NUM_READINGS
 print(f"\nSample (first 10 converted, metres):")
 print(f"  {converted_np[:10]}")
 
-# ── 4. Visualisation ──────────────────────────────────────────────────────────
+#  4. Visualisation
 fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 
 # Histogram of converted distances
