@@ -1,5 +1,5 @@
 """
-BIT 2118: Scientific Computing
+
 Task 15 – Numerical Differentiation
 Real-World Case: Estimating Instantaneous Speed of a Moving Vehicle
 
@@ -21,7 +21,7 @@ v(t) = ds/dt = 9t² - 4t + 1   (exact formula for verification)
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ── 1. Known function and exact derivative ────────────────────────────────────
+# 1. Known function and exact derivative 
 def s(t):
     return 3 * t**3 - 2 * t**2 + t + 5
 
@@ -31,7 +31,7 @@ def v_exact(t):
 def a_exact(t):
     return 18 * t - 4
 
-# ── 2. Numerical derivatives ──────────────────────────────────────────────────
+#  2. Numerical derivatives 
 def forward_diff(func, t, h):
     return (func(t + h) - func(t)) / h
 
@@ -41,7 +41,7 @@ def backward_diff(func, t, h):
 def central_diff(func, t, h):
     return (func(t + h) - func(t - h)) / (2 * h)
 
-# ── 3. Compare at t = 2.0 s with h = 0.1 ─────────────────────────────────────
+# 3. Compare at t = 2.0 s with h = 0.1 
 t_pt = 2.0
 h    = 0.1
 
@@ -57,7 +57,7 @@ print(f"  Backward diff     : {v_bwd:.6f}  error = {abs(v_bwd - v_true):.6f}")
 print(f"  Central diff      : {v_cen:.6f}  error = {abs(v_cen - v_true):.6f}")
 print("  → Central difference has the smallest error.")
 
-# ── 4. Error vs step size h ───────────────────────────────────────────────────
+#  4. Error vs step size h
 h_values = [0.5, 0.1, 0.05, 0.01, 0.005, 0.001, 0.0001]
 err_fwd, err_cen = [], []
 for h_i in h_values:
@@ -68,7 +68,7 @@ print(f"\n  h        Forward error   Central error")
 for h_i, ef, ec in zip(h_values, err_fwd, err_cen):
     print(f"  {h_i:<8}  {ef:.2e}       {ec:.2e}")
 
-# ── 5. Apply to GPS data ──────────────────────────────────────────────────────
+# 5. Apply to GPS data
 # Simulated GPS: position recorded every second for 10 seconds
 t_data = np.arange(0, 11, dtype=float)                     # 0 to 10 s
 s_data = 3 * t_data**3 - 2 * t_data**2 + t_data + 5       # s(t)
@@ -84,7 +84,7 @@ for i in range(len(t_data)):
     print(f"  {t_data[i]:>4.0f}  {s_data[i]:>8.2f}  {velocity_num[i]:>8.4f}  "
           f"{v_exact(t_data[i]):>8.4f}  {accel_num[i]:>8.4f}")
 
-# ── 6. Experiment – coarser sampling (h = 2 s) ───────────────────────────────
+#  6. Experiment 
 t_coarse = np.arange(0, 11, 2, dtype=float)
 s_coarse = s(t_coarse)
 v_coarse = np.gradient(s_coarse, 2.0)
@@ -94,7 +94,7 @@ for i in range(len(t_coarse)):
           f"error={abs(v_coarse[i]-v_exact(t_coarse[i])):.4f}")
 print("  Larger step → larger numerical error in estimated velocity.")
 
-# ── 7. Visualisation ─────────────────────────────────────────────────────────
+# 7. Visualisation 
 t_fine = np.linspace(0, 10, 300)
 
 fig, axes = plt.subplots(1, 2, figsize=(13, 5))
