@@ -1,5 +1,5 @@
 """
-BIT 2118: Scientific Computing
+
 Task 10 – Root Finding: Bisection and Fixed-Point Methods
 Real-World Case: Finding the Break-Even Point of a Business
 
@@ -20,11 +20,11 @@ We solve this using:
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ── 1. Define the function ────────────────────────────────────────────────────
+#  1. Define the function 
 def f(x):
     return 50 * x - 0.5 * x**2 - 10
 
-# ── 2. Bisection Method ───────────────────────────────────────────────────────
+#  2. Bisection Method 
 def bisection(func, a, b, tol=1e-6, max_iter=100):
     """
     Find root of func in [a, b].
@@ -56,7 +56,7 @@ root_b, hist_b = bisection(f, a=50, b=100)
 print(f"  Bisection root   : x = {root_b:.6f} units")
 print(f"  f(root) = {f(root_b):.2e}")
 
-# ── 3. Fixed-Point Iteration ──────────────────────────────────────────────────
+# 3. Fixed-Point Iteration 
 # Rearrange f(x) = 0 as x = g(x):
 #   50*x - 0.5*x^2 - 10 = 0
 #   50*x = 0.5*x^2 + 10
@@ -83,7 +83,7 @@ print(f"  Fixed-Point root : x = {root_fp:.6f} units  (small root; g(x) converge
 print(f"  f(root) = {f(root_fp):.2e}")
 print(f"  Note: bisection found the economically meaningful root x ≈ {root_b:.2f}")
 
-# ── 4. Experiment – change function (higher fixed cost) ──────────────────────
+# 4. Experiment – change function (higher fixed cost) 
 def f2(x):
     return 50 * x - 0.5 * x**2 - 50   # fixed cost raised to $50
 
@@ -92,7 +92,7 @@ print(f"\n=== Experiment: Fixed cost raised to $50 ===")
 print(f"  Break-even shifts to x = {root_b2:.4f} units")
 print("  Higher fixed cost → more units needed to break even.")
 
-# ── 5. Visualisation ─────────────────────────────────────────────────────────
+# 5. Visualisation
 x_vals = np.linspace(0, 100, 400)
 y_vals = f(x_vals)
 
