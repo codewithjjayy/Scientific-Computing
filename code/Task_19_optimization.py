@@ -1,5 +1,5 @@
 """
-BIT 2118: Scientific Computing
+
 Task 19 – Numerical Optimization
 Real-World Case: Minimizing Production Cost for a Manufacturing Facility
 
@@ -20,7 +20,7 @@ import numpy as np
 from scipy.optimize import minimize_scalar, minimize
 import matplotlib.pyplot as plt
 
-# ── 1. Define cost function ───────────────────────────────────────────────────
+# 1. Define cost function 
 def cost(x):
     return 0.5 * x**2 - 20 * x + 300
 
@@ -29,18 +29,18 @@ print("=== Production Cost Optimization ===")
 print(f"  C(x) = 0.5x² - 20x + 300")
 print(f"  Analytic minimum: x = 20, C(20) = {cost(20)}")
 
-# ── 2. Brute force grid search ────────────────────────────────────────────────
+#  2. Brute force grid search 
 x_grid = np.arange(0, 51, 1.0)
 c_grid = cost(x_grid)
 x_min_grid = x_grid[np.argmin(c_grid)]
 print(f"\n  Grid search minimum : x = {x_min_grid},  C = {cost(x_min_grid):.2f}")
 
-# ── 3. scipy.optimize.minimize_scalar ────────────────────────────────────────
+#  3. scipy.optimize.minimize_scalar 
 result_sc = minimize_scalar(cost, bounds=(0, 50), method="bounded")
 print(f"  minimize_scalar     : x = {result_sc.x:.6f},  C = {result_sc.fun:.6f}")
 print(f"  Converged: {result_sc.success}")
 
-# ── 4. Multivariate: 2D cost surface ──────────────────────────────────────────
+# 4. Multivariate: 2D cost surface
 # C(x, y) = (x - 3)^2 + (y - 7)^2 + 2  → minimum at (3, 7)
 def cost2d(xy):
     x, y = xy
@@ -51,7 +51,7 @@ print(f"\n  2D minimization (x-3)²+(y-7)²+2:")
 print(f"    Minimum at x={result_2d.x[0]:.4f}, y={result_2d.x[1]:.4f}")
 print(f"    Minimum value = {result_2d.fun:.6f}  (expected 2.0)")
 
-# ── 5. Constrained optimization ──────────────────────────────────────────────
+#  5. Constrained optimization 
 # Maximize profit: P(x) = 30x - C(x) = 30x - 0.5x² + 20x - 300
 # Constraints: x ≥ 5 (minimum run) and x ≤ 40 (machine capacity)
 def neg_profit(x):
@@ -66,7 +66,7 @@ print(f"\n  Constrained profit maximization (5 ≤ x ≤ 40):")
 print(f"    Optimal production rate: x = {x_opt:.4f} units/hr")
 print(f"    Maximum profit: ${-result_con.fun:.2f}")
 
-# ── 6. Experiment – change cost function (steeper quadratic) ─────────────────
+#  6. Experiment – change cost function (steeper quadratic)
 def cost_exp(x):
     return 2 * x**2 - 20 * x + 300    # steeper parabola
 
@@ -76,7 +76,7 @@ print(f"  Optimal x = {result_exp.x:.4f},  C = {result_exp.fun:.4f}")
 print(f"  Analytic: x = 5.0,  C = {cost_exp(5)}")
 print("  Steeper parabola → optimal quantity shifts toward lower production.")
 
-# ── 7. Visualisation ─────────────────────────────────────────────────────────
+# 7. Visualisation
 x_plot = np.linspace(0, 50, 300)
 
 fig, axes = plt.subplots(1, 2, figsize=(13, 5))
