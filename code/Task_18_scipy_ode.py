@@ -1,5 +1,4 @@
 """
-BIT 2118: Scientific Computing
 Task 18 – Numerical Solution of ODEs Using SciPy
 Real-World Case: Predator-Prey Population Dynamics (Lotka-Volterra Model)
 
@@ -26,7 +25,7 @@ import numpy as np
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
 
-# ── 1. Define the ODE system ──────────────────────────────────────────────────
+# 1. Define the ODE system
 alpha = 0.1    # rabbit birth rate
 beta  = 0.02   # predation rate
 delta = 0.01   # fox growth per rabbit eaten
@@ -38,7 +37,7 @@ def lotka_volterra(t, y):
     dF_dt = delta * R * F - gamma * F
     return [dR_dt, dF_dt]
 
-# ── 2. Solve using solve_ivp (RK45) ──────────────────────────────────────────
+#  2. Solve using solve_ivp (RK45) 
 t_span = (0, 200)
 t_eval = np.linspace(0, 200, 2000)
 y0 = [40, 9]   # initial: 40 rabbits, 9 foxes
@@ -59,7 +58,7 @@ print(f"  Max fox population    : {F.max():.1f}")
 print(f"  Min rabbit population : {R.min():.1f}")
 print(f"  Min fox population    : {F.min():.1f}")
 
-# ── 3. Experiment – higher predation rate ────────────────────────────────────
+#  3. Experiment – higher predation rate 
 beta2 = 0.04
 def lv2(t, y):
     R, F = y
@@ -72,7 +71,7 @@ print(f"  Max rabbit: {R2.max():.1f}  (was {R.max():.1f})")
 print(f"  Max fox   : {F2.max():.1f}  (was {F.max():.1f})")
 print("  Higher predation rate → rabbit population drops faster → fox peaks differently.")
 
-# ── 4. Visualisation ─────────────────────────────────────────────────────────
+# 4. Visualisation 
 fig, axes = plt.subplots(1, 2, figsize=(13, 5))
 
 # Time series
